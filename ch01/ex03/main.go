@@ -19,10 +19,6 @@ func inefficientEcho(args []string) string {
 	return s
 }
 
-func BenchmarkEcho(Echo func([]string) string, count int) string {
-	return " "
-}
-
 func main() {
 	fmt.Println("efficientEcho")
 	ret := efficientEcho(os.Args)
