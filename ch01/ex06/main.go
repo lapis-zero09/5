@@ -13,13 +13,13 @@ import (
 
 var palette = []color.Color{
 	color.RGBA{192, 192, 192, 0},
-	color.RGBA{255, 0, 0, 150},
-	color.RGBA{255, 69, 0, 150},
-	color.RGBA{255, 255, 0, 150},
-	color.RGBA{0, 128, 0, 150},
-	color.RGBA{0, 0, 255, 150},
-	color.RGBA{75, 0, 130, 150},
-	color.RGBA{238, 130, 238, 150},
+	color.RGBA{255, 0, 0, 0},
+	color.RGBA{255, 69, 0, 0},
+	color.RGBA{255, 255, 0, 0},
+	color.RGBA{0, 128, 0, 0},
+	color.RGBA{0, 0, 255, 0},
+	color.RGBA{75, 0, 130, 0},
+	color.RGBA{238, 130, 238, 0},
 }
 
 func main() {
