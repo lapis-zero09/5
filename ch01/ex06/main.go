@@ -12,21 +12,15 @@ import (
 )
 
 var palette = []color.Color{
-	color.Black,
-	// color.RGBA{0, 0xff, 0, 0xff}, // green
-	color.RGBA{255, 0, 0, 1},
-	color.RGBA{255, 69, 0, 1},
-	color.RGBA{255, 255, 0, 1},
-	color.RGBA{0, 128, 0, 1},
-	color.RGBA{0, 0, 255, 1},
-	color.RGBA{75, 0, 130, 1},
-	color.RGBA{238, 130, 238, 1},
+	color.RGBA{192, 192, 192, 0},
+	color.RGBA{255, 0, 0, 150},
+	color.RGBA{255, 69, 0, 150},
+	color.RGBA{255, 255, 0, 150},
+	color.RGBA{0, 128, 0, 150},
+	color.RGBA{0, 0, 255, 150},
+	color.RGBA{75, 0, 130, 150},
+	color.RGBA{238, 130, 238, 150},
 }
-
-const (
-	blackIndex = 0
-	greenIndex = 1
-)
 
 func main() {
 	rand.Seed(time.Now().UTC().UnixNano())
