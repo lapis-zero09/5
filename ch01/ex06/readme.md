@@ -13,9 +13,9 @@ f(t) = exp(2|Sin(t)|)とすると
 値域：1 < f(x) < 8
 
 
-よって，colorIdxの値域は，
+よって，
 
-1 <= colorIdx <= 7
+colorIdx = {x| 1, 2, 3, 4, 5, 6, 7}
 
 paletteの1~7は七色の各色を指す．
 
