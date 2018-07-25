@@ -6,7 +6,7 @@ import (
 )
 
 const (
-	width, height = 700, 420            // canvas size in pixels
+	width, height = 1000, 1000          // canvas size in pixels
 	cells         = 100                 // number of grid cells
 	xyrange       = 30.0                // axis ranges (-xyrange..+xyrange)
 	xyscale       = width / 2 / xyrange // pixels per x or y unit
@@ -17,7 +17,7 @@ const (
 var sin30, cos30 = math.Sin(angle), math.Cos(angle)
 
 func f(x, y float64) float64 {
-	return (x*x - 2*y*y) / 500
+	return (x*x - 2*y*y) / 1000
 }
 
 func corner(i, j int) (float64, float64) {
