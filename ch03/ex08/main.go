@@ -42,34 +42,34 @@ type bigFloatComplex struct {
 	real, imag *big.Float
 }
 
-func bigFloatMul(bfc1, bfc2 bigFloatComplex) bigFloatComplex {
-	return bigFloatComplex{
+func bigFloatMul(bfc1, bfc2 *bigFloatComplex) *bigFloatComplex {
+	return &bigFloatComplex{
 		new(big.Float).Sub(new(big.Float).Mul(bfc1.real, bfc2.real), new(big.Float).Mul(bfc1.imag, bfc2.imag)),
 		new(big.Float).Add(new(big.Float).Mul(bfc1.real, bfc2.imag), new(big.Float).Mul(bfc1.imag, bfc2.real)),
 	}
 }
 
-func bigFloatSub(bfc1, bfc2 bigFloatComplex) bigFloatComplex {
-	return bigFloatComplex{
+func bigFloatSub(bfc1, bfc2 *bigFloatComplex) *bigFloatComplex {
+	return &bigFloatComplex{
 		new(big.Float).Sub(bfc1.real, bfc2.real),
 		new(big.Float).Sub(bfc1.imag, bfc2.imag),
 	}
 }
 
-func bigFloatDiv(bfc1, bfc2 bigFloatComplex) bigFloatComplex {
-	conjugateComplex := bigFloatComplex{
+func bigFloatDiv(bfc1, bfc2 *bigFloatComplex) *bigFloatComplex {
+	conjugateComplex := &bigFloatComplex{
 		bfc2.real,
 		new(big.Float).Mul(big.NewFloat(-1.), bfc2.imag),
 	}
 	numerator := bigFloatMul(bfc1, conjugateComplex)
 	denominator := bigFloatMul(bfc2, conjugateComplex)
-	return bigFloatComplex{
+	return &bigFloatComplex{
 		new(big.Float).Quo(numerator.real, new(big.Float).Add(denominator.real, denominator.imag)),
 		new(big.Float).Quo(numerator.imag, new(big.Float).Add(denominator.real, denominator.imag)),
 	}
 }
 
-func bigFloatDistance(bfc bigFloatComplex) *big.Float {
+func bigFloatDistance(bfc *bigFloatComplex) *big.Float {
 	return new(big.Float).Add(new(big.Float).Mul(bfc.real, bfc.real), new(big.Float).Mul(bfc.imag, bfc.imag))
 }
 
@@ -84,15 +84,15 @@ func newtonBigFloat(x, y float64) color.Color {
 	if x == 0 && y == 0 {
 		return color.Black
 	}
-	z := bigFloatComplex{
+	z := &bigFloatComplex{
 		big.NewFloat(x),
 		big.NewFloat(y),
 	}
-	one := bigFloatComplex{
+	one := &bigFloatComplex{
 		big.NewFloat(1),
 		big.NewFloat(0),
 	}
-	four := bigFloatComplex{
+	four := &bigFloatComplex{
 		big.NewFloat(4),
 		big.NewFloat(0),
 	}
