@@ -29,7 +29,7 @@ func TestRemoveSameAdjacent(t *testing.T) {
 	for idx, seed := range seeds {
 		ans := removeSameAdjacent(seed)
 		if !equals(expected[idx], ans) {
-			t.Errorf("unexpected result. expected: %v, but got: %v", expected[idx], seed)
+			t.Errorf("unexpected result. expected: %v, but got: %v", expected[idx], ans)
 		}
 	}
 }
