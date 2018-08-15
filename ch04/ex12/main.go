@@ -9,8 +9,8 @@ import (
 
 func printXKCD(xkcd *xkcd.XKCD) {
 	fmt.Println("---------------------------------\n")
-	fmt.Printf("#%-5d %s\n%s\n",
-		xkcd.Num, xkcd.Title, xkcd.Transcript)
+	fmt.Printf("#%s\nhttps://xkcd.com/%d\n%s\n",
+		xkcd.Title, xkcd.Num, xkcd.Transcript)
 	fmt.Println("---------------------------------\n")
 }
 
