@@ -2,10 +2,7 @@ package github
 
 import "time"
 
-const (
-	endPoint = "https://api.github.com"
-	// token    = "1b10d735847a3fc181e69bfcf490a044320ce81b"
-)
+const endPoint = "https://api.github.com"
 
 type IssuesSearchResult struct {
 	TotalCount int `json:"total_count"`
