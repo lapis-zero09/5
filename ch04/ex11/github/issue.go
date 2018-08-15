@@ -12,7 +12,7 @@ import (
 )
 
 var endPoint = "https://api.github.com"
-var token = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+var token = "dc37d50f0562e7e2747713bb19b7251375debd56"
 
 func newRequest(method, uri string, body io.Reader) (*http.Request, error) {
 	req, err := http.NewRequest(method, endPoint+uri, body)
