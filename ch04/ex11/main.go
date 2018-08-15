@@ -55,17 +55,24 @@ var (
 )
 
 func main() {
+	token := os.Getenv("GITHUB_TOKEN")
+	if token == "" {
+		fmt.Fprintf(os.Stderr, "Should set github token  like export GITHUB_TOKEN=\"xxxxxxxxxxxx\"\n")
+		os.Exit(1)
+	}
+	reqUser := github.NewReqUser(token)
+
 	flag.Parse()
 	if *method == "" {
 		fmt.Fprintf(os.Stderr, "Should Chose method for issue - get/create/edit/close\n")
 		os.Exit(1)
 	}
-	fmt.Printf("acess to https://github.com/%s/%s", *owner, *repo)
+	fmt.Printf("acess to https://github.com/%s/%s\n", *owner, *repo)
 
 	switch *method {
 	case "get":
 		if *issueId == 0 {
-			issues, err := github.GetIssues(*owner, *repo)
+			issues, err := reqUser.GetIssues(*owner, *repo)
 			if err != nil {
 				fmt.Fprintf(os.Stderr, "error: %v\n", err)
 				os.Exit(1)
@@ -73,7 +80,7 @@ func main() {
 			fmt.Println("Your request is successfully done.")
 			printIssues(issues)
 		} else {
-			issue, err := github.GetIssue(*owner, *repo, *issueId)
+			issue, err := reqUser.GetIssue(*owner, *repo, *issueId)
 			if err != nil {
 				fmt.Fprintf(os.Stderr, "error: %v\n", err)
 				os.Exit(1)
@@ -93,7 +100,7 @@ func main() {
 			*subject, *content = string(bs[0]), string(bs[1])
 		}
 
-		issue, err := github.CreateIssue(*owner, *repo, *subject, *content)
+		issue, err := reqUser.CreateIssue(*owner, *repo, *subject, *content)
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "error: %v\n", err)
 			os.Exit(1)
@@ -118,7 +125,7 @@ func main() {
 			*subject, *content = string(bs[0]), string(bs[1])
 		}
 
-		issue, err := github.EditIssue(*owner, *repo, *issueId, *subject, *content)
+		issue, err := reqUser.EditIssue(*owner, *repo, *issueId, *subject, *content)
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "error: %v\n", err)
 			os.Exit(1)
@@ -134,7 +141,7 @@ func main() {
 			os.Exit(1)
 		}
 
-		issue, err := github.CloseIssue(*owner, *repo, *issueId)
+		issue, err := reqUser.CloseIssue(*owner, *repo, *issueId)
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "error: %v\n", err)
 			os.Exit(1)
