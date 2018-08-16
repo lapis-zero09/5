@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Issue</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <div class="navbar-brand">Issue</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="media">
+            <div class="media-left">
+                <img src="{{if .User.AvatarURL}}{{.User.AvatarURL}}{{else}}https://placekitten.com/g/200/300{{end}}" width="50" height="50"
+                    style="border-radius: 50%; margin-top: 25px">
+            </div>
+            <div class="media-body">
+                <a href='{{.HTMLURL}}'>
+                    <h4>{{.Title}}
+                        <small style="color:gray">{{.Number}}</small>
+                        <button class="btn btn-success">{{.State}}</button>
+                    </h4>
+
+                </a>
+
+                <h5>By <a href='{{.User.HTMLURL}}'>{{if .User.Login}}{{.User.Login}}{{else}}unknown{{end}}</a></h5>
+                <p>{{.Body}}</p>
+                <small>Created At {{.CreatedAt}}</small>
+            </div>
+            <div class="media-right">
+                <div>
+                    <h4>Milestone</h4>
+                    <button class="btn btn-primary">{{.Milestone.Title}}</button>
+                </div>
+                <div>
+                    <h4>Assignees</h4>
+                    {{range .Assignees}}
+                    <tr>
+                        <td><img src="{{if .AvatarURL}}{{.AvatarURL}}{{else}}https://placekitten.com/g/200/300{{end}}" width="30"
+                                height="30" style="border-radius: 50%"></td>
+                        <td><a href='{{.HTMLURL}}'>{{.Login}}</a></td>
+                    </tr>
+                    {{end}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>

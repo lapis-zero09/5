@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Issue</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <div class="navbar-brand">Issue</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="media">
+            <div class="media-left">
+                <img src="https://avatars3.githubusercontent.com/u/8176079?v=4" width="50" height="50"
+                    style="border-radius: 50%; margin-top: 25px">
+            </div>
+            <div class="media-body">
+                <a href='https://github.com/golang/go/issues/26998'>
+                    <h4>cmd/go: &#39;go vet -h&#39; produces help for go command
+                        <small style="color:gray">26998</small>
+                        <button class="btn btn-success">open</button>
+                    </h4>
+
+                </a>
+
+                <h5>By <a href='https://github.com/0xmohit'>0xmohit</a></h5>
+                <p>### What version of Go are you using (`go version`)?
+```
+go version devel &#43;c882f4b Tue Aug 14 20:40:15 2018 &#43;0000 linux/amd64
+```
+
+### Does this issue reproduce with the latest release?
+Yes.  Same result with go 1.10.2.
+
+### What operating system and processor architecture are you using (`go env`)?
+Linux
+
+### What did you do?
+```
+go vet -h
+```
+
+### What did you expect to see?
+Something along the lines of:
+
+```
+usage: vet [-n] [-x] [build flags] [packages]
+
+Vet runs the Go vet command on the packages named by the import paths.
+
+For more about vet, see &#39;go doc cmd/vet&#39;.
+For more about specifying packages, see &#39;go help packages&#39;.
+
+To run the vet tool with specific options, run &#39;go tool vet&#39;.
+
+The -n flag prints commands that would be executed.
+The -x flag prints commands as they are executed.
+
+For more about build flags, see &#39;go help build&#39;.
+
+See also: go fmt, go fix.
+```
+
+### What did you see instead?
+
+```
+Go is a tool for managing Go source code.
+
+Usage:
+
+	go &lt;command&gt; [arguments]
+
+The commands are:
+
+	bug         start a bug report
+	build       compile packages and dependencies
+	clean       remove object files and cached files
+	doc         show documentation for package or symbol
+	env         print Go environment information
+	fix         update packages to use new APIs
+	fmt         gofmt (reformat) package sources
+	generate    generate Go files by processing source
+	get         download and install packages and dependencies
+	install     compile and install packages and dependencies
+	list        list packages or modules
+	mod         module maintenance
+	run         compile and run Go program
+	test        test packages
+	tool        run specified go tool
+	version     print Go version
+	vet         report likely mistakes in packages
+
+Use &#34;go help &lt;command&gt;&#34; for more information about a command.
+
+Additional help topics:
+
+	buildmode   build modes
+	c           calling between Go and C
+	cache       build and test caching
+	environment environment variables
+	filetype    file types
+	gopath      GOPATH environment variable
+	gopath-get  legacy GOPATH go get
+	goproxy     module proxy protocol
+	importpath  import path syntax
+	modules     modules, module versions, and more
+	module-get  module-aware go get
+	packages    package lists and patterns
+	testflag    testing flags
+	testfunc    testing functions
+
+Use &#34;go help &lt;topic&gt;&#34; for more information about that topic.
+```
+</p>
+                <small>Created At 2018-08-15 09:57:05 &#43;0000 UTC</small>
+            </div>
+            <div class="media-right">
+                <div>
+                    <h4>Milestone</h4>
+                    <button class="btn btn-primary">Go1.12</button>
+                </div>
+                <div>
+                    <h4>Assignees</h4>
+                    
+                    <tr>
+                        <td><img src="https://avatars0.githubusercontent.com/u/3576549?v=4" width="30"
+                                height="30" style="border-radius: 50%"></td>
+                        <td><a href='https://github.com/mvdan'>mvdan</a></td>
+                    </tr>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>

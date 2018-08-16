@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Issue</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <div class="navbar-brand">Issue</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="media">
+            <div class="media-left">
+                <img src="https://avatars1.githubusercontent.com/u/2621?v=4" width="50" height="50"
+                    style="border-radius: 50%; margin-top: 25px">
+            </div>
+            <div class="media-body">
+                <a href='https://github.com/golang/go/issues/26969'>
+                    <h4>x/build: fix gomote ssh to COS-based Linux Docker images
+                        <small style="color:gray">26969</small>
+                        <button class="btn btn-success">closed</button>
+                    </h4>
+
+                </a>
+
+                <h5>By <a href='https://github.com/bradfitz'>bradfitz</a></h5>
+                <p>When I moved the Linux Docker-based container images from Kubernetes to [COS](https://cloud.google.com/container-optimized-os/) I accidentally broke `gomote ssh` support.
+
+We used to ssh proxy to the POD&#39;s port 22, which worked, but now we ssh to the COS node&#39;s ssh server, which is the wrong one. We&#39;re also running an SSH server inside the container (which is also listening on port 22 in its private network namespace), and it&#39;s only that inner SSH server that&#39;s authenticated.
+
+We need to configure the COS node&#39;s konlet YAML to either forward some different port (e.g. host 2200 to container 22) or just make the container image listen on 2200 instead, and then configure that in x/build/dashboard/builders.go and make the coordinator respect that in its `remote.go` when it calls `rb.buildlet.ConnectSSH`.
+</p>
+                <small>Created At 2018-08-13 19:20:36 &#43;0000 UTC</small>
+            </div>
+            <div class="media-right">
+                <div>
+                    <h4>Milestone</h4>
+                    <button class="btn btn-primary">Unreleased</button>
+                </div>
+                <div>
+                    <h4>Assignees</h4>
+                    
+                    <tr>
+                        <td><img src="https://avatars3.githubusercontent.com/u/1924134?v=4" width="30"
+                                height="30" style="border-radius: 50%"></td>
+                        <td><a href='https://github.com/dmitshur'>dmitshur</a></td>
+                    </tr>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>
