@@ -29,7 +29,7 @@ func TestCountWordsAndImages(t *testing.T) {
 			expected: [2]int{6, 0},
 		},
 		{
-			HTML:     makeHTML(`<p>this is test sentence.</p><img src="https://example.com"`),
+			HTML:     makeHTML(`<p>this is test sentence.</p><img src="https://example.com" />`),
 			expected: [2]int{4, 1},
 		},
 	}
