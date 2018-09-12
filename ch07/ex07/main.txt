@@ -1,0 +1,1 @@
+CelsiusFlagに与えられる段階でCelsius型にキャストされているから
