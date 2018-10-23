@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"io"
 	"net/http"
-	"net/url"
 	"os"
 	"path"
 	"strings"
@@ -28,7 +27,7 @@ func Extract(u string) ([]string, error) {
 		return nil, fmt.Errorf("parsing %s as HTML: %v", u, err)
 	}
 
-	filePath := URL2FilePath(resp.Request.URL)
+	filePath := "./www/" + path.Base(resp.Request.URL.Path)
 	f, err := os.Create(filePath)
 	if err != nil {
 		return nil, fmt.Errorf("file creating error:%v", err)
@@ -80,12 +79,4 @@ func forEachNode(n *html.Node, pre, post func(n *html.Node)) {
 	if post != nil {
 		post(n)
 	}
-}
-
-func URL2FilePath(u *url.URL) string {
-	local := path.Base(u.Path)
-	if local == "/" {
-		local = "index.html"
-	}
-	return "./www/" + local
 }
