@@ -35,7 +35,7 @@ func Extract(u string) ([]string, error) {
 	defer f.Close()
 
 	// htmlではない場合探索しない
-	if strings.Split(resp.Header.Get("Content-Type"), ";")[0] != "text/html" {
+	if strings.Contains(resp.Header.Get("Content-Type"), "text/html") {
 		if _, err = io.Copy(f, resp.Body); err != nil {
 			return nil, fmt.Errorf("file writing error: %v", err)
 		}
