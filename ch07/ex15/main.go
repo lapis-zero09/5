@@ -22,7 +22,7 @@ func main() {
 
 	env := eval.Env{}
 	for v := range vars {
-		fmt.Println("Input Variants")
+		fmt.Println("Input Variable")
 		for {
 			fmt.Printf("%s = ", v)
 			input.Scan()
