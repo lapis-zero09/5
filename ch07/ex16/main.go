@@ -3,15 +3,13 @@ package main
 import (
 	"fmt"
 	"html/template"
-	"io"
 	"log"
 	"net/http"
-	"strconv"
 
 	"github.com/lapis-zero09/5/ch07/ex15/eval"
 )
 
-func parseInput(input string, env eval.Env) (eval.Expr, error) {
+func parseInput(input string) (eval.Expr, error) {
 	if len(input) <= 0 {
 		return nil, fmt.Errorf("input expr is empty.")
 	}
@@ -26,46 +24,26 @@ func parseInput(input string, env eval.Env) (eval.Expr, error) {
 		return nil, err
 	}
 
-	for v := range vars {
-		if _, ok := env[v]; !ok {
-			return nil, fmt.Errorf("undefined variable: %s", v)
-		}
-	}
-
 	return expr, nil
 }
 
 func main() {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		print(w)
+		tmpl.Execute(w, nil)
 		r.ParseForm()
-		env := eval.Env{}
-		fmt.Println(r.Form)
 
-		_, vs := r.Form["vars"]
-
-		fmt.Println(vs)
-		v, err := strconv.ParseFloat(vs[0], 64)
-		if err != nil {
-			fmt.Fprintf(w, "invalid variable %s=%q\n", k, vs[0])
-			continue
+		exprStr, ok := r.Form["expr"]
+		if !ok {
+			return
 		}
-		env[eval.Var(k)] = v
-
-		_, exprStr := r.Form["expr"]
-		fmt.Fprint(w, exprStr, " => ")
-		expr, err := parseInput(exprStr, env)
+		fmt.Fprint(w, exprStr[0], " => ")
+		expr, err := parseInput(exprStr[0])
 		if err != nil {
 			fmt.Fprintln(w, err)
 		}
-		fmt.Fprintln(w, expr.Eval(env))
+		fmt.Fprintln(w, expr.Eval(eval.Env{}))
 	})
 	log.Fatal(http.ListenAndServe(":8080", nil))
-	// http://localhost:8080/?expr=90%2B98323-32
-}
-
-func print(w io.Writer) {
-	tmpl.Execute(w, nil)
 }
 
 var tmpl = template.Must(template.New("index").Parse(`
@@ -81,9 +59,8 @@ var tmpl = template.Must(template.New("index").Parse(`
   <div class="container">
 	<h1>calc</h1>
 	<form action="/" method="post">
-		expr:<input type="text" name="expr">
-		vars:<input type="text" name="vars">
-    <input type="submit" value="">
+		expr: <input type="text" name="expr">
+    <input type="submit" value="calc">
 	</form>
   </div>
 </div>
