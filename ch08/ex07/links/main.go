@@ -27,7 +27,7 @@ func Extract(u string) ([]string, error) {
 		return nil, fmt.Errorf("parsing %s as HTML: %v", u, err)
 	}
 
-	filePath := "./www/" + path.Base(resp.Request.URL.Path)
+	filePath := path.Base(resp.Request.URL.Path)
 	f, err := os.Create(filePath)
 	if err != nil {
 		return nil, fmt.Errorf("file creating error:%v", err)
