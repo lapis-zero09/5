@@ -9,12 +9,14 @@ import (
 	"github.com/lapis-zero09/5/ch11/ex07/mapintset"
 )
 
+var seed = time.Now().UTC().UnixNano()
+
 func benchMapIntSetAdd(b *testing.B, size int) {
-	rand.Seed(time.Now().UTC().UnixNano())
+	rand.Seed(seed)
 	for i := 0; i < b.N; i++ {
 		mapIntSet := &mapintset.MapIntSet{}
 		for j := 0; j < size; j++ {
-			mapIntSet.Add(rand.Intn(size))
+			mapIntSet.Add(rand.Intn(1000000))
 		}
 	}
 }
@@ -40,11 +42,11 @@ func BenchmarkMapIntSetAdd10000(b *testing.B) {
 }
 
 func benchIntSetAdd(b *testing.B, size int) {
-	rand.Seed(time.Now().UTC().UnixNano())
+	rand.Seed(seed)
 	for i := 0; i < b.N; i++ {
 		intSet := &intset.IntSet{}
 		for j := 0; j < size; j++ {
-			intSet.Add(rand.Intn(size))
+			intSet.Add(rand.Intn(1000000))
 		}
 	}
 }
