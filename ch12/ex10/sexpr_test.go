@@ -5,16 +5,6 @@ import (
 	"testing"
 )
 
-// Test verifies that encoding and decoding a complex data value
-// produces an equal result.
-//
-// The test does not make direct assertions about the encoded output
-// because the output depends on map iteration order, which is
-// nondeterministic.  The output of the t.Log statements can be
-// inspected by running the test with the -v flag:
-//
-// 	$ go test -v gopl.io/ch12/sexpr
-//
 func TestMarshalComplex(t *testing.T) {
 	var ts = []struct {
 		c        [2]float32
@@ -138,7 +128,6 @@ func TestMarshal(t *testing.T) {
 	}
 }
 
-
 func TestUnmarshal(t *testing.T) {
 	t.Run("Movie", func(t *testing.T) {
 		type Movie struct {
@@ -187,7 +176,6 @@ func TestUnmarshal(t *testing.T) {
 		}
 	})
 
-
 	t.Run("Bool", func(t *testing.T) {
 		var b bool
 		if err := Unmarshal([]byte(`t`), &b); err != nil {
@@ -197,7 +185,6 @@ func TestUnmarshal(t *testing.T) {
 			t.Error("unexpected boolean. expected: true, but got: false")
 		}
 	})
-
 
 	t.Run("Complex", func(t *testing.T) {
 		var c complex128
@@ -209,7 +196,6 @@ func TestUnmarshal(t *testing.T) {
 		}
 	})
 
-
 	t.Run("Float", func(t *testing.T) {
 		var f float64
 		if err := Unmarshal([]byte(`2.5`), &f); err != nil {
@@ -219,7 +205,6 @@ func TestUnmarshal(t *testing.T) {
 			t.Errorf("unexpected float. expected: 2.5, but got: %v", f)
 		}
 	})
-
 
 	t.Run("InterfaceSlice", func(t *testing.T) {
 		var i interface{}
@@ -232,7 +217,6 @@ func TestUnmarshal(t *testing.T) {
 		}
 	})
 
-
 	t.Run("InterfaceArray", func(t *testing.T) {
 		var i interface{}
 		if err := Unmarshal([]byte(`("[6]byte" (5 4 3 2 1 0))`), &i); err != nil {
@@ -243,7 +227,6 @@ func TestUnmarshal(t *testing.T) {
 			t.Errorf("unexpected value. expected: %#v, but got: %#v", expected, i)
 		}
 	})
-
 
 	t.Run("InterfaceMap", func(t *testing.T) {
 		var i interface{}
@@ -260,7 +243,6 @@ func TestUnmarshal(t *testing.T) {
 		}
 	})
 
-
 	t.Run("InterfaceMapArrayKey", func(t *testing.T) {
 		var i interface{}
 		if err := Unmarshal([]byte(`("map[[1]byte]int" (((1) 1) ((2) 2) ((3) 3)))`), &i); err != nil {
@@ -275,7 +257,6 @@ func TestUnmarshal(t *testing.T) {
 			t.Errorf("unexpected value. expected: %#v, but got: %#v", expected, i)
 		}
 	})
-
 
 	t.Run("InterfaceMapSliceValue", func(t *testing.T) {
 		var i interface{}
@@ -292,15 +273,14 @@ func TestUnmarshal(t *testing.T) {
 		}
 	})
 
-
 	t.Run("InterfaceMapInterface", func(t *testing.T) {
 		var i interface{}
 		if err := Unmarshal([]byte(`("map[string]interface{}" (("a" ("[]int" (1 2 3))) ("b" ("string" "hello"))))`), &i); err != nil {
 			t.Fatal(err)
 		}
 		expected := map[string]interface{}{
-			"a":     []int{1, 2, 3},
-			"b":     "hello",
+			"a": []int{1, 2, 3},
+			"b": "hello",
 		}
 		if !reflect.DeepEqual(i, expected) {
 			t.Errorf("unexpected value. expected: %#v, but got: %#v", expected, i)
@@ -308,5 +288,3 @@ func TestUnmarshal(t *testing.T) {
 	})
 
 }
-
-

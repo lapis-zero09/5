@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"fmt"
 	"io"
-	"log"
 	"reflect"
 	"strconv"
 	"strings"
@@ -51,8 +50,15 @@ func read(lex *lexer, v reflect.Value) {
 		lex.next()
 		return
 	case scanner.Int:
-		i, _ := strconv.Atoi(lex.text()) // NOTE: ignoring errors
-		v.SetInt(int64(i))
+		i, _ := strconv.ParseInt(lex.text(), 10, 64)
+		switch v.Kind() {
+		case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64:
+			v.SetInt(i)
+		case reflect.Uint, reflect.Uint8, reflect.Uint16, reflect.Uint32, reflect.Uint64:
+			v.SetUint(uint64(i))
+		default:
+			panic("invalid type. cannot set int")
+		}
 		lex.next()
 		return
 	case scanner.Float:
@@ -65,10 +71,10 @@ func read(lex *lexer, v reflect.Value) {
 		switch lex.token {
 		case scanner.Int:
 			i, _ := strconv.Atoi(lex.text()) // NOTE: ignoring errors
-			v.SetInt(int64(i))
+			v.SetInt(int64(-i))
 		case scanner.Float:
 			f, _ := strconv.ParseFloat(lex.text(), 64)
-			v.SetFloat(f)
+			v.SetFloat(-f)
 		default:
 			panic(fmt.Sprintf("unexpected token %q", lex.text()))
 		}
@@ -98,7 +104,6 @@ func read(lex *lexer, v reflect.Value) {
 
 //!+readlist
 func readList(lex *lexer, v reflect.Value) {
-	log.Println(v.Kind())
 	switch v.Kind() {
 	case reflect.Array: // (item ...)
 		for i := 0; !endList(lex); i++ {
@@ -142,7 +147,7 @@ func readList(lex *lexer, v reflect.Value) {
 		}
 		t, _ := strconv.Unquote(lex.text())
 		lex.next()
-		val := reflect.New(getType(t).Elem())
+		val := reflect.New(getType(t)).Elem()
 		read(lex, val)
 		v.Set(val)
 
