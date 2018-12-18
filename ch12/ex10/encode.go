@@ -58,6 +58,11 @@ func encode(buf *bytes.Buffer, v reflect.Value) error {
 	case reflect.Struct: // ((name value) ...)
 		buf.WriteByte('(')
 		for i := 0; i < v.NumField(); i++ {
+			field := v.Field(i)
+			zero := reflect.Zero(field.Type())
+			if reflect.DeepEqual(field.Interface(), zero.Interface()) {
+				continue
+			}
 			if i > 0 {
 				buf.WriteByte(' ')
 			}
