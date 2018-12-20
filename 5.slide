@@ -1,0 +1,62 @@
+Go研修
+振り返り
+21 Dec 2018
+Tags: 研修, golang
+
+河野 晋策
+株式会社リクルートテクノロジーズ
+shinsaku_kono@r.recruit.co.jp
+https://github.com/lapis-zero09
+@lapis_zero09
+
+* 所感
+
+- Goの並列処理の書きやすさにとても感動した．
+- (並行処理のテストは考えるべきことがとても多いことを意識する)
+- 各回の終わりに「次こそは早目に練習問題取り組むぞ」と思ったが一度も実行されなかった．
+- Goが好きになった．
+- 普段Pythonばかり触っているので型は最高だなと再認識した．
+
+* BTW
+
+Go研修前にGoで簡素なGoRecというレコメンドエンジン(?)を作っていた．
+.link https://github.com/lapis-zero09/GoRec
+.link https://lapis-zero09.hatenablog.com/entry/2018/05/06/171536
+Go研修を終えた自分がそのコードを読んだ時に酷過ぎると思ったことに成長を感じた．
+.image ./img/old_direc.png
+
+* GoRecのその後
+
+ディレクトリ構成を直し明らかにひどいコードのリファクタを行った．
+.image ./img/new_direc.png
+
+* GoRecの動作
+
+- Input:
+    user_id, item_id, rating
+    1, 2, 4
+    1, 127, 1
+    21, 63, 2
+    ...
+- Output:
+    »»»» go run cmd/gorec/main.go ./data/ml-100k/u.data
+    2018/12/21 04:11:59 UserSize: 943
+    2018/12/21 04:11:59 ItemSize: 1682
+
+    +++User Simlarity+++
+
+    Adjusted Cosine
+    -----------------------------
+    2018/12/21 04:12:18 target ID: 941
+    rank    id       similarity
+    -----------------------------
+    1       91      0.243949
+    2       780     0.242358
+
+* 今後の展望
+
+遅くもないが速くもないので速くする．
+
+.image ./img/bench.png
+
+p.s. 研修を受ける前に書いたGoの酷過ぎるコードがあったので成長が実感できた．
