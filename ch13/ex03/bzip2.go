@@ -14,11 +14,13 @@ import "C"
 
 import (
 	"io"
+	"sync"
 	"unsafe"
 )
 
 type writer struct {
 	w      io.Writer // underlying output stream
+	mu     sync.Mutex
 	stream *C.bz_stream
 	outbuf [64 * 1024]byte
 }
@@ -64,6 +66,8 @@ func (w *writer) Write(data []byte) (int, error) {
 // Close flushes the compressed data and closes the stream.
 // It does not close the underlying io.Writer.
 func (w *writer) Close() error {
+	w.mu.Lock()
+	defer w.mu.Unlock()
 	if w.stream == nil {
 		panic("closed")
 	}
